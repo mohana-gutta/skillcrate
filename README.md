@@ -2,6 +2,8 @@
 
 Agent plugins for Claude Code, OpenAI Codex and Gemini CLI. Each plugin is one reusable skill packaged for every platform.
 
+Docs: see the [wiki pages](wiki/Home.md) for the catalog, architecture, release verification and contributing guide.
+
 ## Plugins
 
 <!-- plugins:table:start -->

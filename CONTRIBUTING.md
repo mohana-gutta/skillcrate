@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for helping. Please read this before opening a PR. More detail: [wiki/Contributing.md](wiki/Contributing.md) and [wiki/Architecture.md](wiki/Architecture.md).
+Thanks for helping. By participating you agree to the [Code of Conduct](CODE_OF_CONDUCT.md). Please read this before opening a PR. More detail: [wiki/Contributing.md](wiki/Contributing.md) and [wiki/Architecture.md](wiki/Architecture.md).
 
 ## Add or update a plugin
 

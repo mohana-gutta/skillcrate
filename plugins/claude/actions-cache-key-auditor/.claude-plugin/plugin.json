@@ -1,5 +1,5 @@
 {
   "name": "actions-cache-key-auditor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Statically audits GitHub Actions workflows for actions/cache keys that never refresh or never hit, with cited evidence and minimal line-level patch suggestions."
 }

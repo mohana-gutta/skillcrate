@@ -206,8 +206,11 @@ def audit_text(root, rel, text, want_patches=False):
                     new = raw.rstrip()[:-1] + add + q if q and raw.rstrip().endswith(q) else (
                         raw.rstrip() + add if not q else None)
                     if new:
+                        # diff the whole file so the hunk header carries the real line number and context
+                        edited = list(lines)
+                        edited[ln - 1] = new
                         patch = "\n".join(difflib.unified_diff(
-                            [raw], [new], "a/" + rel, "b/" + rel, lineterm="", n=0))
+                            lines, edited, "a/" + rel, "b/" + rel, lineterm="", n=2))
             sev = "warning" if patch is not None or lock or not exprs else "warning"
             if not lock:
                 expl += " No lock file could be matched to the cached path, so no patch is suggested."

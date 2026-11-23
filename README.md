@@ -10,7 +10,7 @@ Docs: see the [wiki pages](wiki/Home.md) for the catalog, architecture, release 
 | Plugin | Version | Platforms | Permissions |
 |---|---|---|---|
 | [`iam-policy-diff-reviewer`](#iam-policy-diff-reviewer) | 0.2.0 | Claude Code, Codex, Gemini CLI, portable | read-only |
-| [`actions-cache-key-auditor`](#actions-cache-key-auditor) | 0.1.0 | Claude Code, Codex, Gemini CLI, portable | read-only |
+| [`actions-cache-key-auditor`](#actions-cache-key-auditor) | 0.1.1 | Claude Code, Codex, Gemini CLI, portable | read-only |
 <!-- plugins:table:end -->
 
 ## Install
@@ -146,6 +146,19 @@ python3 scripts/cache_audit.py --path examples/repo --patches
 - Limits: workflow files over 1 MiB are skipped, at most 200 workflow files are read, and symlinks are not followed.
 - Not implemented: live GitHub API checks (cache quota, stale entries) and wasted-minutes estimates.
 <!-- plugin:actions-cache-key-auditor:end -->
+
+## Persona skills library (SDLC roles with industry overlays)
+
+A separate set of role skills for AI agents: product manager, solution architect, data engineer, SRE, security engineer, controller, revenue accountant, sales operations and 27 more, each producing named deliverables
+(PRD, architecture decisions, threat model, test plan, SLOs, ...). Retail Media, Healthcare and Insurance have 11 sector overlays each, E-commerce and Banking 10, Manufacturing 9 and SaaS 12, 30 sector profiles, 11 niche technology and domain specialty skills (Snowflake, Kafka, dbt, ASC 606, FHIR, ISO 20022, ...), month-end close and revenue-to-cash workflows, with domain-specific steps and checks
+(for example ad-event deduplication and ROAS reconciliation, or HL7/FHIR interfaces and PHI audit trails). It lives under `skills/` in a clone of this repo and is not part of the plugin table above.
+
+```bash
+python scripts/recommend_skills.py --sector healthcare --team "Product Manager,Solution Architect,QA Engineer" --install .claude/skills
+```
+
+`--install .agents/skills` is the Codex equivalent. The command prints the skills it chose, an ordered plan (parallel where inputs allow) and the approvals a human must give.
+See [skills/README.md](skills/README.md) and [docs/skills/SELECTION.md](docs/skills/SELECTION.md). All skills are drafts that have not been reviewed by domain experts.
 
 ## Downloads
 

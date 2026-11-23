@@ -10,5 +10,17 @@
       "portable"
     ],
     "permission_profile": "read-only"
+  },
+  {
+    "name": "actions-cache-key-auditor",
+    "version": "0.1.0",
+    "description": "Statically audits GitHub Actions workflows for actions/cache keys that never refresh or never hit, with cited evidence and minimal line-level patch suggestions.",
+    "platforms": [
+      "claude",
+      "codex",
+      "gemini",
+      "portable"
+    ],
+    "permission_profile": "read-only"
   }
 ]

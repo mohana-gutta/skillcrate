@@ -8,6 +8,7 @@ Agent plugins for Claude Code, OpenAI Codex and Gemini CLI. Each plugin is one r
 | Plugin | Version | Platforms | Permissions |
 |---|---|---|---|
 | [`iam-policy-diff-reviewer`](#iam-policy-diff-reviewer) | 0.2.0 | Claude Code, Codex, Gemini CLI, portable | read-only |
+| [`actions-cache-key-auditor`](#actions-cache-key-auditor) | 0.1.0 | Claude Code, Codex, Gemini CLI, portable | read-only |
 <!-- plugins:table:end -->
 
 ## Install
@@ -73,6 +74,76 @@ It compares policy statements only. It does not evaluate SCPs, permission bounda
 resource policies, and it errs toward flagging, so treat `NO_ADDED_GRANTS_DETECTED` as "nothing found by this check", never
 as proof a change is safe. For an authoritative result, also use IAM Access Analyzer `check-no-new-access`.
 <!-- plugin:iam-policy-diff-reviewer:end -->
+
+<!-- plugin:actions-cache-key-auditor:start -->
+## actions-cache-key-auditor
+
+Statically audits GitHub Actions workflows for actions/cache keys that never refresh or never hit, with cited evidence and minimal line-level patch suggestions.
+
+### Install
+
+**Claude Code**
+```
+/plugin marketplace add mohana-gutta/skillcrate
+/plugin install actions-cache-key-auditor@skillcrate
+```
+
+**Gemini CLI** (from a clone of this repo)
+```bash
+gemini extensions link plugins/gemini/actions-cache-key-auditor
+```
+
+**Codex** (from a clone; use `.agents/skills/` in a repo instead of `~/` for one repo only)
+```bash
+mkdir -p ~/.agents/skills && cp -r plugins/codex/actions-cache-key-auditor/.agents/skills/actions-cache-key-auditor ~/.agents/skills/
+```
+
+**Any other agent**: copy `plugins/portable/actions-cache-key-auditor` into its skills directory.
+
+### Usage
+
+# Usage
+
+## With an agent
+
+Example prompts:
+
+- "My GitHub Actions cache never hits. Audit this repo's workflows."
+- "Run the cache key auditor and show me patches for the errors."
+
+The agent runs the script, explains the findings with evidence, and applies a patch only after you approve.
+
+## Direct commands
+
+```
+python3 scripts/cache_audit.py --path . 
+python3 scripts/cache_audit.py --path . --format json --patches
+python3 scripts/cache_audit.py --path . --fail-on warning   # for CI, exit 1 on warning or error
+```
+
+Try the bundled example:
+
+```
+python3 scripts/cache_audit.py --path examples/repo --patches
+```
+
+## Options
+
+| Flag | Meaning |
+|---|---|
+| `--path DIR` | Repository root (default `.`) |
+| `--format text\|json` | Output format (default text). JSON has `schema_version: "1"` |
+| `--patches` | Include suggested unified diffs where one can be determined safely |
+| `--fail-on possible\|warning\|error` | Exit 1 when a finding at or above that severity exists |
+
+## Limits
+
+- Static and offline only. Needs Python 3.9+ and no packages. It uses no network and never writes files.
+- Workflows are read with a line-based scanner, not a full YAML or expression evaluator. Unusual layouts (anchors, flow-style `with: {...}`, keys built entirely from expressions) are skipped or reported as `possible`. Expect some misses.
+- Patches are only produced for CK001 when the ecosystem is recognised from `path` and a matching lock file exists in the repo root.
+- Limits: workflow files over 1 MiB are skipped, at most 200 workflow files are read, and symlinks are not followed.
+- Not implemented: live GitHub API checks (cache quota, stale entries) and wasted-minutes estimates.
+<!-- plugin:actions-cache-key-auditor:end -->
 
 ## Downloads
 

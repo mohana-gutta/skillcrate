@@ -9,6 +9,12 @@
       "version": "0.2.0",
       "description": "Offline, credential-free review of AWS IAM policy changes, from two policy JSONs or directly from a terraform plan, reporting newly granted access for human review.",
       "source": "./plugins/claude/iam-policy-diff-reviewer"
+    },
+    {
+      "name": "actions-cache-key-auditor",
+      "version": "0.1.0",
+      "description": "Statically audits GitHub Actions workflows for actions/cache keys that never refresh or never hit, with cited evidence and minimal line-level patch suggestions.",
+      "source": "./plugins/claude/actions-cache-key-auditor"
     }
   ]
 }

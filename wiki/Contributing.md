@@ -18,4 +18,4 @@
 
 ## Security
 
-Report vulnerabilities privately through GitHub Security Advisories on the repository rather than a public issue.
+See [SECURITY.md](../SECURITY.md) for reporting vulnerabilities.

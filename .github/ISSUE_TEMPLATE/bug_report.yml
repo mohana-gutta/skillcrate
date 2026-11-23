@@ -1,0 +1,38 @@
+name: Bug report
+description: A plugin script or skill behaves incorrectly
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Security vulnerability? Do not file it here. See [SECURITY.md](../blob/main/SECURITY.md).
+  - type: dropdown
+    id: plugin
+    attributes:
+      label: Plugin
+      options: [iam-policy-diff-reviewer, actions-cache-key-auditor, other / release tooling]
+    validations: { required: true }
+  - type: input
+    id: version
+    attributes: { label: Plugin version, placeholder: "0.2.0" }
+    validations: { required: true }
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options: [Claude Code, Codex, Gemini CLI, Direct script (portable), Other]
+    validations: { required: true }
+  - type: textarea
+    id: expected
+    attributes: { label: What happened and what did you expect? }
+    validations: { required: true }
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction
+      description: Exact command and a minimal input (policy JSON, workflow file). Remove secrets and account IDs.
+      render: shell
+    validations: { required: true }
+  - type: input
+    id: python
+    attributes: { label: Python version, placeholder: "3.12" }

@@ -1,0 +1,14 @@
+[
+  {
+    "name": "iam-policy-diff-reviewer",
+    "version": "0.2.0",
+    "description": "Offline, credential-free review of AWS IAM policy changes, from two policy JSONs or directly from a terraform plan, reporting newly granted access for human review.",
+    "platforms": [
+      "claude",
+      "codex",
+      "gemini",
+      "portable"
+    ],
+    "permission_profile": "read-only"
+  }
+]

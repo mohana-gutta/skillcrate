@@ -1,0 +1,14 @@
+{
+  "name": "skillcrate",
+  "owner": {
+    "name": "mohana-gutta"
+  },
+  "plugins": [
+    {
+      "name": "iam-policy-diff-reviewer",
+      "version": "0.2.0",
+      "description": "Offline, credential-free review of AWS IAM policy changes, from two policy JSONs or directly from a terraform plan, reporting newly granted access for human review.",
+      "source": "./plugins/claude/iam-policy-diff-reviewer"
+    }
+  ]
+}
